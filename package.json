@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "uni-tool run dev",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "uni-tool run dev"
   },
   "repository": {
     "type": "git",
@@ -18,12 +17,19 @@
   },
   "homepage": "https://github.com/coloseo-design/uniicon-home#readme",
   "dependencies": {
+    "@uni/design": "^0.0.11",
+    "jszip": "^3.10.1",
     "react": "^18.2.0",
+    "react-color": "^2.19.3",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.2",
+    "svg-to-image": "^1.1.3",
+    "uni-icons": "^1.0.1",
+    "uni-icons-react": "^1.0.1",
     "uni-tool": "^1.0.1"
   },
   "devDependencies": {
+    "@types/react-color": "^3.0.6",
     "@types/react-dom": "^18.0.6",
     "@types/react-router-dom": "^5.3.3"
   }

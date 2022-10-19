@@ -1,21 +1,23 @@
 import ReactDOM from 'react-dom/client';
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import Home from './home';
 import File from './file';
-import Layout from './layout'
+import Layout from './layout';
+import Design from './design';
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
 root.render(
   <React.StrictMode>
     <Layout>
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
           <Route  element={<Home />} path="/" />
           <Route  element={<File />} path="/file" />
+          <Route  element={<Design />} path="/design" />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </Layout>
   </React.StrictMode>,
 )

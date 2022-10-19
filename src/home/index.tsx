@@ -5,10 +5,15 @@ import './index.less';
 const Home = () => {
   const navigate = useNavigate();
   return (
-    <div className='home' onClick={() => {
-      navigate('/file');
-    }}>
-      <div className='banner'></div>
+    <div className='home'>
+      <div className='banner'>
+        <div className='btn'>
+          <div onClick={() => {
+            navigate('/design');
+          }}>开始使用</div>
+          <div>设计规范</div>
+        </div>
+      </div>
       <div className='production'>
         <div className='production-header'>产品特点</div>
       </div>
