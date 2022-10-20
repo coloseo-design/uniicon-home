@@ -1,8 +1,8 @@
 import svgToImage from 'svg-to-image';
 import JSZip from 'jszip';
-import { SvgNode } from 'uni-icons/lib/types';
+import { DataType } from './icon/index';
 
-function childrenLoop(data: SvgNode[], info: any): string {
+function childrenLoop(data: DataType[], info: any): string {
   const { color, lineWidth, type, isSpecial } =  info;
   let result = '';
   (data || []).forEach((item: any) => {
@@ -33,7 +33,7 @@ function childrenLoop(data: SvgNode[], info: any): string {
   return result
 }
 
-export function objectToSvg(icon: SvgNode, size: number, color: string, lineWidth: number) { // 把对象转成svg
+export function objectToSvg(icon: DataType, size: number, color: string, lineWidth: number) { // 把对象转成svg
   const info = { color, lineWidth, type: icon.type || '', isSpecial: icon.isSpecial };
   const children = icon.children && icon.children.length > 0 ? childrenLoop(icon.children, info) : '';
   const svg = `<svg viewBox="${icon.attrs.viewBox}" fill="${icon.attrs.fill}" width="${size}px" height="${size}px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">${children}</svg>`;
@@ -41,7 +41,7 @@ export function objectToSvg(icon: SvgNode, size: number, color: string, lineWidt
 }
 
 
-export function DownloadCopyPNG(icon: SvgNode, size: number, color: string, lineWidth: number, isDownload: boolean = false) {
+export function DownloadCopyPNG(icon: DataType, size: number, color: string, lineWidth: number, isDownload: boolean = false) {
   const data = [objectToSvg(icon, size, color, lineWidth)];
   svgToImage(data, (err: any, image: any) => { // 将svg转换成图片
     if (err) throw err;
@@ -51,7 +51,7 @@ export function DownloadCopyPNG(icon: SvgNode, size: number, color: string, line
     const context = canvas.getContext('2d');
     context?.drawImage(image, 0, 0);
     if (isDownload) { // 下载png
-      Download(canvas.toDataURL('image/png'), icon.englishName || '');
+      Download(canvas.toDataURL('image/png'), `${icon.englishName}-${icon.chineseName}` || '');
     } else { // 复制图片
       canvas.toBlob((blob) => {
         if (blob) {
@@ -64,13 +64,13 @@ export function DownloadCopyPNG(icon: SvgNode, size: number, color: string, line
 }
 
 
-export function DownloadCopySVG(icon: SvgNode, size: number, color: string, lineWidth: number, isDownload: boolean = false) {
+export function DownloadCopySVG(icon: DataType, size: number, color: string, lineWidth: number, isDownload: boolean = false) {
   const svg = objectToSvg(icon, size, color, lineWidth);
   if (isDownload) { // 下载svg
     const svg = objectToSvg(icon, size, color, lineWidth);
     const blob = new Blob([svg], {type: 'image/svg+xml'});
     const url = URL.createObjectURL(blob);
-    Download(url, icon.englishName || '');
+    Download(url, `${icon.englishName}-${icon.chineseName}` || '');
   } else { // 复制svg
     Copy(svg);
   }

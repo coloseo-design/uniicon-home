@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/coloseo-design/uniicon-home#readme",
   "dependencies": {
-    "@uni/design": "^0.0.11",
+    "@uni/design": "^0.0.12",
     "jszip": "^3.10.1",
     "react": "^18.2.0",
     "react-color": "^2.19.3",

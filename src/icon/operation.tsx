@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import { Button, Divider, InputNumber, Slider } from '@uni/design';
 import ColorPicker from './color-picker';
+import { MenuType } from './index';
 
 interface OperationProps {
   size: number,
@@ -11,7 +12,9 @@ interface OperationProps {
   setLineWidth: (line: number) => void;
   setLine: (isLine: boolean) => void;
   isLine: boolean;
-  currentMenu: string;
+  currentMenu: MenuType;
+  // isBatch: boolean;
+  // setBatchData: (data: SvgNode[]) => void;
 }
 
 const Operation = (props: OperationProps) => {
@@ -55,10 +58,10 @@ const Operation = (props: OperationProps) => {
 
 
   return (
-    <div className='left'>
+    <div className='left-fixed'>
       <div className='title'>样式</div>
       <div className='btn'>
-        <Button onClick={handleLine(true)} disabled={specialIcon.includes(currentMenu)} type={isLine ? "primary" : 'default'} style={{ width: 103, height: 24, marginRight: 8 }}>线性</Button>
+        <Button onClick={handleLine(true)} disabled={specialIcon.includes(currentMenu.title)} type={isLine ? "primary" : 'default'} style={{ width: 103, height: 24, marginRight: 8 }}>线性</Button>
         <Button onClick={handleLine(false)} type={!isLine ? "primary" : 'default'} style={{ width: 103, height: 24 }}>面性</Button>
       </div>
       <Divider style={{ margin: '24px 0px 8px 0px' }} />

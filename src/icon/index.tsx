@@ -5,6 +5,7 @@ import * as Icons from 'uni-icons';
 import MenuCom from './menu';
 import Operation from './operation';
 import IconFlex from './icon-flex';
+import MenuData from './menu.config';
 import { BatchDownload,  objectToSvg} from '../utils';
 
 
@@ -17,6 +18,17 @@ export interface ListType {
   svgHTML: string;
 }
 
+export interface MenuType {
+  title: string;
+  children?: MenuType[];
+  level?: number;
+  isTemp?: boolean;
+}
+
+export interface DataType extends SvgNode {
+  level?: number;
+}
+
 const AllData = Object.values(Icons);
 
 const LineData = AllData.filter((i) => i.type === 'Line');
@@ -24,35 +36,34 @@ const LineData = AllData.filter((i) => i.type === 'Line');
 const SurfaceData = AllData.filter((i) => i.type === 'Surface');
 
 const Design = () => {
-  const [currentMenu, setMenu] = useState('通用名词图标');
+  const [menus, setMenus] = useState<MenuType[]>(MenuData);
+  const [currentMenu, setCurrentMenu] = useState<MenuType>({title: '通用名词图标', level: 1 });
   const [isLine, setLine] = useState(true);
   const [size, setSize] = useState(24);
   const [lineWidth, setLineWidth] = useState(2);
   const [color, setColor] = useState('#9298B5');
-  const [isBatch, $isBatch] = useState(false);
-  const [batchData, setBatchData] = useState<SvgNode[]>([]);
-  const [isChecked, setChecked] = useState(false);
+  const [isBatch, $isBatch] = useState(false); // 是否开始批量操作
+  const [batchData, setBatchData] = useState<DataType[]>([]); // 批量操作选择的icon
+  const [isChecked, setChecked] = useState(false); // 是否只查看已选择的icon
   const [searchValue, $search] = useState('');
 
   const handleSearch = (val: string) => {
-    console.log('===val', val);
+    setBatchData(batchData.filter((i) => i.search && i.search.indexOf(searchValue) >= 0));
     $search(val);
   }
 
   const data = useMemo(() => {
-    const keys = currentMenu.slice(0, currentMenu.length - 2);
+    const keys = currentMenu.title.slice(0, currentMenu.title.length - 2);
     const filterData = isLine ? LineData : SurfaceData;
-    const batchFilterData = isLine ? batchData.filter((i) => i.type === 'Line') : batchData.filter((i) => i.type === 'Surface');
     let result: SvgNode[] = [];
     if (searchValue) {
-      const temData = isChecked ? batchFilterData : filterData;
+      const temData = filterData;
       result = temData.filter((i) => i.search && i.search.indexOf(searchValue) >= 0);
     } else {
-      result = isChecked ? batchFilterData : filterData.filter((i) => i.category && i.category.indexOf(keys) >=0);
+      result = filterData.filter((i) => i.category && i.category.indexOf(keys) >=0);
     }
     return result;
   }, [isLine, currentMenu, isChecked, searchValue]);
-
 
   const handleExport = () => {
     const list: ListType[] = [];
@@ -80,9 +91,13 @@ const Design = () => {
         <div className='btn'>
           {isBatch ?
             <>
-              <Button onClick={() => setBatchData(data)}>全部</Button>
+              <Button disabled={isChecked} onClick={() => setBatchData(data)}>全部</Button>
               <Button onClick={handleExport} style={{ margin: '0px 8px' }} type='primary'>导出</Button>
-              <Button onClick={() => $isBatch(false)}>取消</Button>
+              <Button onClick={() => {
+                $isBatch(false);
+                setChecked(false);
+                setBatchData([]);
+              }}>取消</Button>
             </>
             :
             <>
@@ -101,8 +116,10 @@ const Design = () => {
       <div className='section'>
         <MenuCom
           currentMenu={currentMenu}
-          setMenu={setMenu}
+          setCurrentMenu={setCurrentMenu}
           setLine={setLine}
+          isChecked={isChecked}
+          menus={menus}
         />
         <div className='content'>
           <IconFlex
@@ -114,19 +131,22 @@ const Design = () => {
             isBatch={isBatch}
             batchData={batchData}
             setBatchData={setBatchData}
-          />
-          <Operation
-            size={size}
-            setSize={setSize}
-            lineWidth={lineWidth}
-            setLineWidth={setLineWidth}
-            color={color}
-            setColor={setColor}
-            setLine={setLine}
+            isChecked={isChecked}
             isLine={isLine}
-            currentMenu={currentMenu}
+            setMenus={setMenus}
           />
         </div>
+        <Operation
+          size={size}
+          setSize={setSize}
+          lineWidth={lineWidth}
+          setLineWidth={setLineWidth}
+          color={color}
+          setColor={setColor}
+          setLine={setLine}
+          isLine={isLine}
+          currentMenu={currentMenu}
+        />
       </div>
     </div>
   )

@@ -1,28 +1,45 @@
-import React, { useState } from 'react';
-import { Popover, Message } from '@uni/design';
-import ReactIcon from 'uni-icons-react';
-import { SvgNode } from 'uni-icons/lib/types';
+import React, { useState, useMemo, useEffect } from 'react';
+import {  Message } from '@uni/design';
+import MenuData from './menu.config';
+import { MenuType, DataType } from './index';
 import { DownloadCopyPNG, DownloadCopySVG, Copy } from '../utils';
+import CurrentIcon from './current';
+
 
 interface IconFlexProps {
   data: any[];
   lineWidth: number;
   size: number;
   color: string;
-  currentMenu: string;
+  currentMenu: MenuType;
   isBatch?: boolean;
-  batchData: SvgNode[];
-  setBatchData: (data: SvgNode[]) => void;
+  batchData: DataType[];
+  setBatchData: (data: DataType[]) => void;
+  isChecked: boolean;
+  isLine: boolean;
+  setMenus: (menu: MenuType[]) => void;
 }
 
 
 const IconFlex = (props: IconFlexProps) => {
-  const { data, size, lineWidth, color, currentMenu, isBatch, setBatchData, batchData }= props;
   const [simple, setSimple] = useState(false);
   const [active, setActive] = useState('');
+  const {
+    data,
+    size,
+    lineWidth,
+    color,
+    currentMenu,
+    isBatch,
+    setBatchData,
+    batchData,
+    isChecked,
+    isLine,
+    setMenus,
+  }= props;
 
 
-  const OperationPng = (current: SvgNode, isDownload: boolean) => (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const OperationPng = (current: DataType, isDownload: boolean) => (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault();
     DownloadCopyPNG(current, size, color, lineWidth, isDownload);
     Message.info({
@@ -30,7 +47,7 @@ const IconFlex = (props: IconFlexProps) => {
     });
   };
 
-  const OperationSvg = (current: SvgNode, isDownload: boolean) => (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const OperationSvg = (current: DataType, isDownload: boolean) => (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault();
     DownloadCopySVG(current, size, color, lineWidth, isDownload);
     Message.info({
@@ -38,8 +55,7 @@ const IconFlex = (props: IconFlexProps) => {
     });
   }
 
-  const handleClick = (current: SvgNode) => (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    e.preventDefault();
+  const handleClick = (current: DataType) => {
     if (!isBatch) {
       setActive(current.englishName || '');
       DownloadCopySVG(current, size, color, lineWidth);
@@ -49,13 +65,13 @@ const IconFlex = (props: IconFlexProps) => {
         setBatchData(batchData.filter((i) => i.englishName !== current.englishName));
       } else {
         const list = [...batchData];
-        list.push(current) 
+        list.push({...current, level: currentMenu.level });
         setBatchData(list);
       }
     }
   };
 
-  const handleCode = (current: SvgNode, type: 'react' | 'vue') => (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const handleCode = (current: DataType, type: 'react' | 'vue') => (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault();
     if (type === 'react') {
       const lw = current.type === 'Line' ? `lineWidth={${lineWidth}}` : '';
@@ -82,33 +98,55 @@ const IconFlex = (props: IconFlexProps) => {
       </div>
     )
   }
+  const showData = useMemo(() => {
+    if (isChecked) {
+      const objData: any = {};
+      batchData.filter((i) => isLine ? i.type === 'Line' : i.type === 'Surface').forEach((item) => {
+        const name = item.category ? item.category.split('/')[1] : '';
+        if (objData[name]) {
+          Object.assign(objData, {
+            [name]:  objData[name].concat(item),
+          })
+        } else {
+          Object.assign(objData, {
+            [name]: [item],
+          })
+        }
+      });
+      return objData;
+    };
+    return {[currentMenu.title]: data};
+  }, [isChecked, isBatch, data, batchData, isLine]);
+
+  useEffect(() => {
+    if (isChecked) {
+      const keys = Object.keys(showData).map((i: string) => ({ title: i, isTemp: true, children: [] }));
+      setMenus(keys);
+    } else {
+      setMenus(MenuData)
+    }
+  }, [isChecked]);
 
   return (
     <div className='right'>
-      <div className='right-header'>
-        <div className='info'>{`${currentMenu}（${data.length}）`}</div>
-        <div className='btns'></div>
-      </div>
-      <div className='right-section'>
-        {data.map((item) => (
-          <div key={item.englishName}>
-            <div
-              className='current'
-              style={{
-                width: simple ? 55 : 93,
-                height: simple ? 55 : 93,
-                border: batchData.some((i) => i.englishName === item.englishName) ? '1px solid #326EFF' : undefined,
-              }}
-              onClick={handleClick(item)}
-            >
-              <div>
-                <ReactIcon name={item.englishName} lineWidth={lineWidth} style={{ fontSize: size, color: active === item.englishName ? 'rgb(74, 127, 255)' : color }} />
-                {!simple && <div className='text'>{item.chineseName}</div>}
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
+      {Object.values(showData).map((item: DataType[], index: number) => (
+        <CurrentIcon
+          size={size}
+          color={color}
+          lineWidth={lineWidth}
+          popNode={popNode}
+          simple={simple}
+          setSimple={setSimple}
+          data={item}
+          handleClick={handleClick}
+          batchData={batchData}
+          active={active}
+          setActive={setActive}
+          idx={index}
+          key={index}
+          title={item.length > 0 &&  item[0].category ? item[0].category.split('/')[1] : ''}
+        />
+      ))}
     </div>
   )
 }
