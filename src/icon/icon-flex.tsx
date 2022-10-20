@@ -12,12 +12,12 @@ interface IconFlexProps {
   currentMenu: string;
   isBatch?: boolean;
   batchData: SvgNode[];
-  setBatch: (data: SvgNode[]) => void;
+  setBatchData: (data: SvgNode[]) => void;
 }
 
 
 const IconFlex = (props: IconFlexProps) => {
-  const { data, size, lineWidth, color, currentMenu, isBatch, setBatch, batchData }= props;
+  const { data, size, lineWidth, color, currentMenu, isBatch, setBatchData, batchData }= props;
   const [simple, setSimple] = useState(false);
   const [active, setActive] = useState('');
 
@@ -46,11 +46,11 @@ const IconFlex = (props: IconFlexProps) => {
       Message.info({ content: '复制SVG成功' });
     } else {
       if (batchData.some((i) => i.englishName === current.englishName)) {
-        setBatch(batchData.filter((i) => i.englishName !== current.englishName));
+        setBatchData(batchData.filter((i) => i.englishName !== current.englishName));
       } else {
         const list = [...batchData];
         list.push(current) 
-        setBatch(list);
+        setBatchData(list);
       }
     }
   };

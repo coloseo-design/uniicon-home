@@ -53,7 +53,6 @@ const Operation = (props: OperationProps) => {
 
   const specialIcon = ['管理中台图标', '供应链图标', '办公组图标'];
 
-  console.log('==!isLine ? 0 : lineWidth', !isLine ? 0 : lineWidth);
 
   return (
     <div className='left'>

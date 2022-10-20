@@ -13,7 +13,7 @@ const Layout = (props: any) => {
   return (
     <div>
       <Header tabs={tabs} />
-      <div>{props.children}</div>
+      <div className='layout-content'>{props.children}</div>
     </div>
   )
 };

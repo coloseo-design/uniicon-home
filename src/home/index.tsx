@@ -9,9 +9,11 @@ const Home = () => {
       <div className='banner'>
         <div className='btn'>
           <div onClick={() => {
-            navigate('/design');
+            navigate('/icon');
           }}>开始使用</div>
-          <div>设计规范</div>
+          <div onClick={() => {
+             navigate('/design');
+          }}>设计规范</div>
         </div>
       </div>
       <div className='production'>
