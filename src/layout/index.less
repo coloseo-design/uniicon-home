@@ -20,20 +20,35 @@ body {
   .logo {
     width: 113px;
     height: 32px;
+    cursor: pointer;
   }
   .search {
     min-width: 150px;
   }
   .tabs {
     display: flex;
+    align-items: center;
     & > div {
       margin-left: 56px;
     }
+  }
+  .header-user {
+    color: #0270FE;
+    display: flex;
+    align-items: center;
+    padding-left: 24px;
+    border-left: 1px solid rgb(236, 240, 241);
   }
   .change-time {
     img {
       width: 30px;
       margin: 0px 32px;
+      cursor: pointer;
+    }
+    .dropImg {
+      position: absolute;
+      top: 40px;
+      left: 0px;
     }
   }
 }

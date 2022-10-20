@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Header = (props: any) => {
   const { tabs } = props;
@@ -13,10 +14,14 @@ const Header = (props: any) => {
     $daytime(!daytime);
   };
 
+  const navigate = useNavigate();
+
   return (
     <div className="header">
       <div className='left'>
-        <div className='logo' />
+        <div className='logo' onClick={() => navigate('/')}>
+          <img src={require('../assets/logo.svg')} alt="" />
+        </div>
         <div className="search" />
       </div>
       <div className='right'>
@@ -52,8 +57,7 @@ const Header = (props: any) => {
           />
         )}
       </div>
-      <div className="line" />
-      <div style={{ color: '#0270FE' }}>
+      <div className='header-user'>
         您好，请登录
         <img
           src={require('../assets/login.png')}

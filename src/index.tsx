@@ -10,14 +10,14 @@ const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
 
 root.render(
   <React.StrictMode>
-    <Layout>
       <HashRouter>
-        <Routes>
-          <Route  element={<Home />} path="/" />
-          <Route  element={<Design />} path="/design" />
-          <Route  element={<IconPage />} path="/icon" />
-        </Routes>
+        <Layout>
+          <Routes>
+            <Route  element={<Home />} path="/" />
+            <Route  element={<Design />} path="/design" />
+            <Route  element={<IconPage />} path="/icon" />
+          </Routes>
+        </Layout>
       </HashRouter>
-    </Layout>
   </React.StrictMode>,
 )
