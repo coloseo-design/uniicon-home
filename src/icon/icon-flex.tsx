@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import {  Message } from '@uni/design';
+import { Message } from '@uni/design';
 import MenuData from './menu.config';
 import { MenuType, DataType } from './index';
 import { DownloadCopyPNG, DownloadCopySVG, Copy } from '../utils';
@@ -18,6 +18,7 @@ interface IconFlexProps {
   isChecked: boolean;
   isLine: boolean;
   setMenus: (menu: MenuType[]) => void;
+  setCurrentMenu: (current: MenuType) => void;
 }
 
 
@@ -36,6 +37,7 @@ const IconFlex = (props: IconFlexProps) => {
     isChecked,
     isLine,
     setMenus,
+    setCurrentMenu,
   }= props;
 
 
@@ -120,12 +122,13 @@ const IconFlex = (props: IconFlexProps) => {
 
   useEffect(() => {
     if (isChecked) {
-      const keys = Object.keys(showData).map((i: string) => ({ title: i, isTemp: true, children: [] }));
+      const keys: MenuType[] = Object.keys(showData).map((i: string) => ({ title: `${i}图标`, isTemp: true, children: [] }));
+      keys.length > 0 && setCurrentMenu(keys[0]);
       setMenus(keys);
     } else {
       setMenus(MenuData)
     }
-  }, [isChecked]);
+  }, [isChecked, isLine]);
 
   return (
     <div className='right'>

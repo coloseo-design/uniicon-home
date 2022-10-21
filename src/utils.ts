@@ -1,6 +1,7 @@
 import svgToImage from 'svg-to-image';
 import JSZip from 'jszip';
-import { DataType } from './icon/index';
+import { DataType, ListType } from './icon/index';
+
 
 function childrenLoop(data: DataType[], info: any): string {
   const { color, lineWidth, type, isSpecial } =  info;
@@ -53,10 +54,10 @@ export function DownloadCopyPNG(icon: DataType, size: number, color: string, lin
     if (isDownload) { // 下载png
       Download(canvas.toDataURL('image/png'), `${icon.englishName}-${icon.chineseName}` || '');
     } else { // 复制图片
-      canvas.toBlob((blob) => {
+      canvas.toBlob(async (blob) => {
         if (blob) {
           const item = new ClipboardItem({ [blob.type]: blob });
-          navigator.clipboard.write([item]);
+          await navigator.clipboard.write([item]);
         }
       });
     }
@@ -76,7 +77,7 @@ export function DownloadCopySVG(icon: DataType, size: number, color: string, lin
   }
 }
 
-export function BatchDownload(data: any[]) {
+export function BatchDownload(data: ListType[]) {
   const zip = new JSZip();
   data.forEach((obj) => zip.file(obj.name + '.svg', obj.svgHTML));
   zip.generateAsync({ 

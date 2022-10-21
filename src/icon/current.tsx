@@ -17,8 +17,8 @@ const CurrentIcon = (props: any) => {
 
   return (
     <>
-      <div className='right-header'>
-        {data.length && <div className='info'>{`${title}名称（${data.length}）`}</div>}
+      <div className='right-header' id={`${title}图标`}>
+        {data.length && <div className='info'>{`${title}图标（${data.length}）`}</div>}
         {idx === 0 && <div className='btns'>
           <div
             className='btns-left'

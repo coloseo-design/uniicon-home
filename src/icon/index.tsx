@@ -70,7 +70,7 @@ const Design = () => {
     const exportData = isBatch ? batchData : data;
     exportData.forEach((item) => {
       list.push({
-        name: item.englishName || '',
+        name: `${item.englishName}-${item.chineseName}` || '',
         svgHTML: objectToSvg(item, size, color, lineWidth),
       });
     });
@@ -134,6 +134,7 @@ const Design = () => {
             isChecked={isChecked}
             isLine={isLine}
             setMenus={setMenus}
+            setCurrentMenu={setCurrentMenu}
           />
         </div>
         <Operation

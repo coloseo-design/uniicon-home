@@ -14,13 +14,15 @@ interface MenuProps {
 }
 
 const MenuCom = (props: MenuProps) => {
-  const { currentMenu, setCurrentMenu, setLine, menus = [] } = props;
+  const { currentMenu, setCurrentMenu, setLine, menus = [], isChecked } = props;
   const [openTitle, $OpenTitle] = useState(['基础图标', 'M域特殊图标']);
   const handleClick = (i: MenuType) => (evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     evt.preventDefault();
     setCurrentMenu(i);
     const specialIcon = ['管理中台图标', '供应链图标', '办公组图标']; // 只有面性图标才有特殊图标
-    setLine(specialIcon.includes(i.title) ? false : true);
+    if (specialIcon.includes(i.title)) {
+      setLine(false);
+    }
   };
 
   const handleChange = (key: MenuType) => {
@@ -35,19 +37,37 @@ const MenuCom = (props: MenuProps) => {
 
   return (
     <div className='menu'>
-      {(menus || []).map((item: MenuType) => (
-        <div key={item.title}>
-          <div className='submenu' onClick={handleChange.bind(null, item)}>
-            {item.title}
-            {!item.isTemp && <Icon type={openTitle.includes(item.title) ? 'down' : 'up'} style={{ color: '#B3BACA' }} />}
+      {isChecked ? <>
+        {(menus || []).map((item) => (
+          <div
+            className={`item ${currentMenu.title === item.title ? 'active' : ''}`}
+            onClick={handleClick(item)}
+            key={item.title}
+          >
+            <a href={`#${currentMenu.title}`}>
+              {item.title}
+            </a>
           </div>
-          <div style={{ height: openTitle.includes(item.title) ? '100%' : 0, overflow: 'hidden' }}>
-            {(item.children || []).map((i) => (
-              <div className={`item ${currentMenu.title === i.title ? 'active' : '' }`} onClick={handleClick(i)} key={i.title}>{i.title}</div>
-            ))}
+        ))}
+      </>
+        :
+        <>
+          {(menus || []).map((item: MenuType) => (
+            <div key={item.title}>
+              <div className='submenu' onClick={handleChange.bind(null, item)}>
+                {item.title}
+                <Icon type={openTitle.includes(item.title) ? 'down' : 'up'} style={{ color: '#B3BACA' }} />
+              </div>
+              <div style={{ height: openTitle.includes(item.title) ? '100%' : 0, overflow: 'hidden' }}>
+                {(item.children || []).map((i) => (
+                  <div className={`item ${currentMenu.title === i.title ? 'active' : ''}`} onClick={handleClick(i)} key={i.title}>{i.title}</div>
+                ))}
+              </div>
             </div>
-        </div>
-      ))}
+          ))}
+        </>
+
+      }
     </div>
   )
 };
