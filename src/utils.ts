@@ -34,7 +34,7 @@ function childrenLoop(data: DataType[], info: any): string {
   return result
 }
 
-export function objectToSvg(icon: DataType, size: number, color: string, lineWidth: number) { // 把对象转成svg
+export function objectToSvg(icon: DataType, size: number, color: string, lineWidth: number) { // 把对象转成svg标签字符串
   const info = { color, lineWidth, type: icon.type || '', isSpecial: icon.isSpecial };
   const children = icon.children && icon.children.length > 0 ? childrenLoop(icon.children, info) : '';
   const svg = `<svg viewBox="${icon.attrs.viewBox}" fill="${icon.attrs.fill}" width="${size}px" height="${size}px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">${children}</svg>`;
@@ -47,8 +47,8 @@ export function DownloadCopyPNG(icon: DataType, size: number, color: string, lin
   svgToImage(data, (err: any, image: any) => { // 将svg转换成图片
     if (err) throw err;
     const canvas = document.createElement('canvas');
-    canvas.width = 46;
-    canvas.height = 46;
+    canvas.width = size;
+    canvas.height = size;
     const context = canvas.getContext('2d');
     context?.drawImage(image, 0, 0);
     if (isDownload) { // 下载png
@@ -77,7 +77,7 @@ export function DownloadCopySVG(icon: DataType, size: number, color: string, lin
   }
 }
 
-export function BatchDownload(data: ListType[]) {
+export function BatchDownload(data: ListType[]) { // 批量下载
   const zip = new JSZip();
   data.forEach((obj) => zip.file(obj.name + '.svg', obj.svgHTML));
   zip.generateAsync({ 
@@ -88,7 +88,7 @@ export function BatchDownload(data: ListType[]) {
   });
 }
 
-export function Copy(content: string) {
+export function Copy(content: string) { // 复制
   const aux = document.createElement("textarea"); 
   aux.value = content;
   document.body.appendChild(aux); 
@@ -100,7 +100,7 @@ export function Copy(content: string) {
 }
 
 
-export function Download(url: string, name: string = 'download'){
+export function Download(url: string, name: string = 'download'){ // 下载
   const oA = document.createElement("a");
   oA.download = name;// 设置下载的文件名，默认是'下载'
   oA.href = url;
