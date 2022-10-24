@@ -77,6 +77,15 @@ const Design = () => {
     BatchDownload(list);
   };
 
+  const ChoseCurrentAll = () => {
+    const tem = [...batchData];
+    (data || []).forEach((item) => {
+      if (!batchData.some((i) => i.englishName === item.englishName)) {
+        tem.push(item);
+      }
+   });
+   setBatchData([...tem]);
+  };
 
   return (
     <div className='design-icon'>
@@ -91,7 +100,7 @@ const Design = () => {
         <div className='btn'>
           {isBatch ?
             <>
-              <Button disabled={isChecked} onClick={() => setBatchData(data)}>全部</Button>
+              <Button disabled={isChecked} onClick={ChoseCurrentAll}>全部</Button>
               <Button onClick={handleExport} style={{ margin: '0px 8px' }} type='primary'>导出</Button>
               <Button onClick={() => {
                 $isBatch(false);
@@ -121,7 +130,7 @@ const Design = () => {
           isChecked={isChecked}
           menus={menus}
         />
-        <div className='content'>
+        <div className='content' id="checkedContent">
           <IconFlex
             data={data}
             size={size}

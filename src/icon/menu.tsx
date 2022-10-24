@@ -19,6 +19,11 @@ const MenuCom = (props: MenuProps) => {
   const handleClick = (i: MenuType) => (evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     evt.preventDefault();
     setCurrentMenu(i);
+    const parent = document.getElementById('checkedContent');
+    const scrollChild = document.getElementById(i.title) as HTMLElement
+    if (isChecked && scrollChild && parent) {
+      parent.scrollTop = scrollChild.offsetTop - 136;
+    }
     const specialIcon = ['管理中台图标', '供应链图标', '办公组图标']; // 只有面性图标才有特殊图标
     if (specialIcon.includes(i.title)) {
       setLine(false);
@@ -60,7 +65,13 @@ const MenuCom = (props: MenuProps) => {
               </div>
               <div style={{ height: openTitle.includes(item.title) ? '100%' : 0, overflow: 'hidden' }}>
                 {(item.children || []).map((i) => (
-                  <div className={`item ${currentMenu.title === i.title ? 'active' : ''}`} onClick={handleClick(i)} key={i.title}>{i.title}</div>
+                  <div
+                    className={`item ${currentMenu.title === i.title ? 'active' : ''}`}
+                    onClick={handleClick(i)}
+                    key={i.title}
+                  >
+                    {i.title}
+                  </div>
                 ))}
               </div>
             </div>

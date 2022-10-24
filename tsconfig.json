@@ -19,7 +19,8 @@
     "src",
   ],
   "files": [
-    "src/index.tsx"
+    "src/index.tsx",
+    "type.d.ts",
   ],
   "exclude": [
     "node_modules", "lib", "es", "**/__tests__/**",
