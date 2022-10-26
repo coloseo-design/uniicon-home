@@ -46,20 +46,28 @@ export function DownloadCopyPNG(icon: DataType, size: number, color: string, lin
   const data = [objectToSvg(icon, size, color, lineWidth)];
   svgToImage(data, (err: any, image: any) => { // 将svg转换成图片
     if (err) throw err;
+    const definition = 7; // 数值越大，图片越清晰， 图片体积越大
     const canvas = document.createElement('canvas');
-    canvas.width = size;
-    canvas.height = size;
+    canvas.width = size * definition;
+    canvas.height = size * definition;
+    canvas.style.width = size + 'px';
+    canvas.style.height = size + 'px';
     const context = canvas.getContext('2d');
+    context?.scale(definition, definition);
     context?.drawImage(image, 0, 0);
     if (isDownload) { // 下载png
       Download(canvas.toDataURL('image/png'), `${icon.englishName}-${icon.chineseName}` || '');
     } else { // 复制图片
-      canvas.toBlob(async (blob) => {
-        if (blob) {
-          const item = new ClipboardItem({ [blob.type]: blob });
-          await navigator.clipboard.write([item]);
-        }
-      });
+      if (navigator.clipboard.write) {
+        canvas.toBlob(async (blob) => {
+          if (blob) {
+            const item = new ClipboardItem({ [blob.type]: blob });
+            await navigator.clipboard.write([item]);
+          }
+        });
+      } else {
+        Copy(canvas.toDataURL('image/png'));
+      }
     }
   });
 }
