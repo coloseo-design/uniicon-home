@@ -70,16 +70,18 @@
     .content {
       flex: 1;
       display: flex;
-      padding: 50px 322px 0px 65px;
+      padding: 55px 322px 0px 65px;
       height: calc(100vh - 136px);
       overflow-y: auto;
       .right {
         flex: 1;
         margin-right: 50px;
         &-header {
+          height: 40px;
           display: flex;
           justify-content: space-between;
           margin-bottom: 25px;
+          align-items: center;
           .info {
             font-weight: 500;
             color: rgb(62, 68, 95);
@@ -116,24 +118,29 @@
             background: rgb(255, 255, 255);
             border-radius: 4px;
             margin: 0px 16px 16px 0px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            align-content: center;
+            padding: 0px 8px;
             border: 1px solid rgb(232, 233, 237);
             text-align: center;
             &:hover {
               box-shadow: 0px 2px 16px rgba(202, 203, 208, 0.53);
             }
+            .icon-div {
+              height: 47px;
+              display: flex;
+              justify-content: center;
+              align-items: flex-end;
+            }
             .text {
               color: rgb(146, 152, 181);
               font-size: 12px;
               font-weight: 400;
-              line-height: 24px;
+              height: 24px;
               margin-top: 4px;
+              line-height: 24px;
               white-space: nowrap;
               text-overflow: ellipsis;
               overflow: hidden;
+              margin-bottom: 18px;
             }
           }
         }
@@ -144,11 +151,11 @@
       top: 250px;
       right: 60px;
       width: 262px;
-      height: 418px;
+      height: 401px;
       border: 1px solid rgb(240, 240, 240);
       border-radius: 4px;
       background-color: #fff;
-      padding: 40px 24px 24px 24px;
+      padding: 40px 24px 0px 24px;
       .title {
         color: rgb(62, 68, 95);
         line-height: 24px;
@@ -162,7 +169,7 @@
       position: relative;
       display: flex;
       align-items: center;
-      margin-top: 8px;
+      margin-top: 3px;
       .picker {
         display: inline-block;
         cursor: pointer;
@@ -170,7 +177,22 @@
         background-color: #fff;
         width: 24px;
         height: 24px;
-        margin-right: 28px;
+        margin-right: 8px;
+        margin-top: 5px;
+      }
+      .color {
+        width: 99px;
+        height: 24px;
+        box-sizing: border-box;
+      background: rgb(255, 255, 255);
+      border: 1px solid rgb(232, 233, 237);
+      border-radius: 4px;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 2px 20px 2px 20px;
       }
     }
   }
@@ -185,10 +207,10 @@
 .popNode {
   & > div {
     height: 28px;
-    color: rgb(78, 89, 105);
+    color: rgb(62, 75, 94);
     font-size: 14px;
     font-weight: 400;
-    line-height: 1.399999976158142;
+    line-height: 28px;
     cursor: pointer;
     &:hover {
       color: #4A7FFF;
@@ -200,5 +222,27 @@
   transition: visibility 0.1s !important;
   .uni-pop-over-content-arrow {
     display: none !important;
+  }
+  .uni-pop-over-content-inner {
+    box-shadow:  0px 2px 16px rgba(202, 203, 208, 0.53) !important;
+  }
+  .uni-pop-over-content-inner-content {
+    padding: 8px 18px 8px 12px;
+  }
+}
+
+.changeSlider {
+  .uni-slider-rail {
+    background: #E5E6EB;
+    &:hover {
+      background: #E5E6EB;
+    }
+  }
+  .uni-slider-bar {
+    background-color: #326EFF !important;
+  }
+  .uni-slider-dot {
+    border: 2px solid #326EFF;
+    background: #fff !important;
   }
 }

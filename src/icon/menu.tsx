@@ -11,10 +11,11 @@ interface MenuProps {
   setLine: (siLine: boolean) => void;
   isChecked: boolean;
   menus: MenuType[];
+  specialIcon: string[];
 }
 
 const MenuCom = (props: MenuProps) => {
-  const { currentMenu, setCurrentMenu, setLine, menus = [], isChecked } = props;
+  const { currentMenu, setCurrentMenu, setLine, menus = [], isChecked, specialIcon } = props;
   const [openTitle, $OpenTitle] = useState(['基础图标', 'M域特殊图标']);
   const handleClick = (i: MenuType) => (evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     evt.preventDefault();
@@ -24,7 +25,7 @@ const MenuCom = (props: MenuProps) => {
     if (isChecked && scrollChild && parent) {
       parent.scrollTop = scrollChild.offsetTop - 136;
     }
-    const specialIcon = ['管理中台图标', '供应链图标', '办公组图标']; // 只有面性图标才有特殊图标
+    
     if (specialIcon.includes(i.title)) {
       setLine(false);
     }

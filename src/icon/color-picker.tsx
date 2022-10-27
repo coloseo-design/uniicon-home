@@ -55,7 +55,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
         <div className="picker" style={{ backgroundColor: color }} />
       </Dropdown>
       
-        <Button style={{ width: 99, height: 24 }}>{color}</Button>
+        <div className='color'>{color}</div>
     </div>
   );
 };

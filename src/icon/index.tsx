@@ -35,6 +35,8 @@ const LineData = AllData.filter((i) => i.type === 'Line');
 
 const SurfaceData = AllData.filter((i) => i.type === 'Surface');
 
+const specialIcon = ['管理中台图标', '供应链图标', '办公组图标'];
+
 const Design = () => {
   const [menus, setMenus] = useState<MenuType[]>(MenuData);
   const [currentMenu, setCurrentMenu] = useState<MenuType>({title: '通用名词图标', level: 1 });
@@ -93,7 +95,7 @@ const Design = () => {
         <div className='user'></div>
         <div className='input'>
           <Search onSearch={handleSearch} style={{ flex: 1 }} placeholder="输入图标关键词" />
-          {isBatch && <div style={{ marginTop: 5, marginLeft: 8 }}>
+          {isBatch && <div style={{ marginTop: 5, marginLeft: 16 }}>
             <Checkbox onChange={(checked) => setChecked(checked)}>仅看已选</Checkbox>
           </div>}
         </div>
@@ -101,7 +103,7 @@ const Design = () => {
           {isBatch ?
             <>
               <Button disabled={isChecked} onClick={ChoseCurrentAll}>全部</Button>
-              <Button onClick={handleExport} style={{ margin: '0px 8px' }} type='primary'>导出</Button>
+              <Button onClick={handleExport} style={{ margin: '0px 12px' }} type='primary'>导出</Button>
               <Button onClick={() => {
                 $isBatch(false);
                 setChecked(false);
@@ -111,7 +113,7 @@ const Design = () => {
             :
             <>
               <Button
-                style={{ marginRight: 8 }}
+                style={{ marginRight: 16 }}
                 onClick={() => $isBatch(true)}
               >
                 <Icon type="add" style={{ fontSize: 12 }} />
@@ -129,6 +131,7 @@ const Design = () => {
           setLine={setLine}
           isChecked={isChecked}
           menus={menus}
+          specialIcon={specialIcon}
         />
         <div className='content' id="checkedContent">
           <IconFlex
@@ -156,6 +159,7 @@ const Design = () => {
           setLine={setLine}
           isLine={isLine}
           currentMenu={currentMenu}
+          specialIcon={specialIcon}
         />
       </div>
     </div>

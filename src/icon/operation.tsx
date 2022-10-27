@@ -13,6 +13,7 @@ interface OperationProps {
   setLine: (isLine: boolean) => void;
   isLine: boolean;
   currentMenu: MenuType;
+  specialIcon: string[];
 }
 
 const Operation = (props: OperationProps) => {
@@ -26,6 +27,7 @@ const Operation = (props: OperationProps) => {
     isLine,
     setLine,
     currentMenu,
+    specialIcon,
   } = props;
 
   const handleSizeChange = (val: number) => {
@@ -52,8 +54,6 @@ const Operation = (props: OperationProps) => {
     setLine(bol);
   }
 
-  const specialIcon = ['管理中台图标', '供应链图标', '办公组图标'];
-
 
   return (
     <div className='left-fixed'>
@@ -75,7 +75,7 @@ const Operation = (props: OperationProps) => {
           面性
         </Button>
       </div>
-      <Divider style={{ margin: '24px 0px 8px 0px' }} />
+      <Divider style={{ borderTop: '1px solid #E8E9ED', margin: '16px 0px 8px 0px' }} />
       <div className='title'>图标大小</div>
       <div className='btn'>
         <div style={{ flex: 1, marginTop: 8, marginLeft: 8 }}>
@@ -84,6 +84,7 @@ const Operation = (props: OperationProps) => {
             max={32}
             value={size}
             onChange={handleSizeChange}
+            className="changeSlider"
           />
         </div>
         <InputNumber
@@ -94,7 +95,7 @@ const Operation = (props: OperationProps) => {
           value={size}
         />
       </div>
-      <Divider style={{ margin: '24px 0px 8px 0px' }} />
+      <Divider style={{ borderTop: '1px solid #E8E9ED', margin: '16px 0px 8px 0px' }} />
       <div className='title'>描边粗细</div>
       <div className='btn'>
         <div style={{ flex: 1, marginTop: 8, marginLeft: 8 }}>
@@ -104,6 +105,7 @@ const Operation = (props: OperationProps) => {
             max={4}
             value={!isLine ? 0 : lineWidth}
             onChange={handleLineChange}
+            className="changeSlider"
           />
         </div>
         <InputNumber
@@ -112,19 +114,19 @@ const Operation = (props: OperationProps) => {
           onChange={handleLineChange}
           style={{ width: 49, height: 24, marginLeft: 8 }}
           value={!isLine ? 0 : lineWidth}
+          disabled={specialIcon.includes(currentMenu.title)}
         />
       </div>
-      <Divider style={{ margin: '24px 0px 8px 0px' }} />
+      <Divider style={{ borderTop: '1px solid #E8E9ED', margin: '16px 0px 6px 0px' }} />
       <div className='title'>颜色</div>
       <div className='btn'>
         <div>
           <ColorPicker defaultColor={color} onChange={onChange} />
         </div>
       </div>
-      <Divider style={{ margin: '24px 0px 8px 0px' }} />
       <Button
         onClick={handleRest}
-        style={{ margin: '0px auto', width: 214, height: 24 }}
+        style={{ margin: '0px auto', width: 214, height: 24, marginTop: 16 }}
       >
         清空配置
       </Button>

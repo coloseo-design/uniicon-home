@@ -13,13 +13,14 @@ const CurrentIcon = (props: any) => {
     color,
     idx,
     title,
+    isBatch = false,
   } = props;
 
   return (
     <>
       <div className='right-header' id={`${title}图标`}>
         {data.length && <div className='info'>{`${title}图标（${data.length}）`}</div>}
-        {idx === 0 && <div className='btns'>
+        {idx === 0 && <div className='btns' style={{ marginRight: simple ? 53 : 16 }}>
           <div
             className='btns-left'
             style={{ border: simple ? '1px solid #326EFF' : 'undefined', background: simple ? undefined : '#326EFF' }}
@@ -45,8 +46,11 @@ const CurrentIcon = (props: any) => {
           <div key={item.englishName}>
             <Popover
               content={popNode(item)}
-              placement="right"
+              placement="rightTop"
               className='popIcon'
+              trigger='click'
+              visible={isBatch ? false : undefined}
+              overlayStyle={{ height: 184 }}
             >
               <div
                 className='current'
@@ -62,10 +66,10 @@ const CurrentIcon = (props: any) => {
                 }}
                 onClick={handleClick.bind(null, item)}
               >
-                <div style={{ width: '100%', padding: '0px 8px' }}>
-                  <ReactIcon name={item.englishName} lineWidth={lineWidth} style={{ fontSize: size, color: active === item.englishName ? 'rgb(74, 127, 255)' : color }} />
+                <div className='icon-div' style={{ alignItems: simple ? 'center' : 'flex-end', height: simple ? 55 : 47 }}>
+                    <ReactIcon name={item.englishName} lineWidth={lineWidth} style={{ fontSize: size, color: active === item.englishName ? 'rgb(74, 127, 255)' : color }} />
+                  </div>
                   {!simple && <div className='text'>{item.chineseName}</div>}
-                </div>
               </div>
             </Popover>
           </div>

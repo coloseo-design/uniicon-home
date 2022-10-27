@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { Message } from '@uni/design';
+import { Message, Icon } from '@uni/design';
 import MenuData from './menu.config';
 import { MenuType, DataType } from './index';
 import { DownloadCopyPNG, DownloadCopySVG, Copy } from '../utils';
@@ -44,7 +44,7 @@ const IconFlex = (props: IconFlexProps) => {
   const OperationPng = (current: DataType, isDownload: boolean) => (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault();
     DownloadCopyPNG(current, size, color, lineWidth, isDownload);
-    Message.info({
+    Message.success({
       content: isDownload ? '下载PNG成功' : '复制PNG成功',
     });
   };
@@ -52,7 +52,7 @@ const IconFlex = (props: IconFlexProps) => {
   const OperationSvg = (current: DataType, isDownload: boolean) => (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault();
     DownloadCopySVG(current, size, color, lineWidth, isDownload);
-    Message.info({
+    Message.success({
       content: isDownload ? '下载SVG成功' : '复制SVG成功',
     });
   }
@@ -61,7 +61,7 @@ const IconFlex = (props: IconFlexProps) => {
     if (!isBatch) {
       setActive(current.englishName || '');
       DownloadCopySVG(current, size, color, lineWidth);
-      Message.info({ content: '复制SVG成功' });
+      Message.success({ content: '复制SVG成功' });
     } else {
       if (batchData.some((i) => i.englishName === current.englishName)) {
         setBatchData(batchData.filter((i) => i.englishName !== current.englishName));
@@ -84,7 +84,7 @@ const IconFlex = (props: IconFlexProps) => {
       const res = `<Icon name="${current.englishName}" ${lw} style="color: ${color}; fontSize: ${size}px"  />`;
       Copy(res);
     }
-    Message.info({
+    Message.success({
       content: type === 'react' ? '复制React代码成功' : '复制Vue代码成功',
     });
   }
@@ -147,6 +147,7 @@ const IconFlex = (props: IconFlexProps) => {
           setActive={setActive}
           idx={index}
           key={index}
+          isBatch={isBatch}
           title={item.length > 0 &&  item[0].category ? item[0].category.split('/')[1] : ''}
         />
       ))}
