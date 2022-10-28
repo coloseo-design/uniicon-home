@@ -1,13 +1,11 @@
-import React, { useState, useMemo, useEffect } from 'react';
-import { Message, Icon } from '@uni/design';
-import MenuData from './menu.config';
-import { MenuType, DataType } from './index';
+import React, { useState } from 'react';
+import { Message } from '@uni/design';
+import { MenuType, DataType, TestDataType, SpecialMap } from './index';
 import { DownloadCopyPNG, DownloadCopySVG, Copy } from '../utils';
 import CurrentIcon from './current';
 
 
 interface IconFlexProps {
-  data: any[];
   lineWidth: number;
   size: number;
   color: string;
@@ -15,10 +13,7 @@ interface IconFlexProps {
   isBatch?: boolean;
   batchData: DataType[];
   setBatchData: (data: DataType[]) => void;
-  isChecked: boolean;
-  isLine: boolean;
-  setMenus: (menu: MenuType[]) => void;
-  setCurrentMenu: (current: MenuType) => void;
+  resultData: TestDataType,
 }
 
 
@@ -26,7 +21,6 @@ const IconFlex = (props: IconFlexProps) => {
   const [simple, setSimple] = useState(false);
   const [active, setActive] = useState('');
   const {
-    data,
     size,
     lineWidth,
     color,
@@ -34,10 +28,7 @@ const IconFlex = (props: IconFlexProps) => {
     isBatch,
     setBatchData,
     batchData,
-    isChecked,
-    isLine,
-    setMenus,
-    setCurrentMenu,
+    resultData,
   }= props;
 
 
@@ -100,39 +91,11 @@ const IconFlex = (props: IconFlexProps) => {
       </div>
     )
   }
-  const showData = useMemo(() => {
-    if (isChecked) {
-      const objData: any = {};
-      batchData.filter((i) => isLine ? i.type === 'Line' : i.type === 'Surface').forEach((item) => {
-        const name = item.category ? item.category.split('/')[1] : '';
-        if (objData[name]) {
-          Object.assign(objData, {
-            [name]:  objData[name].concat(item),
-          })
-        } else {
-          Object.assign(objData, {
-            [name]: [item],
-          })
-        }
-      });
-      return objData;
-    };
-    return {[currentMenu.title]: data};
-  }, [isChecked, isBatch, data, batchData, isLine]);
 
-  useEffect(() => {
-    if (isChecked) {
-      const keys: MenuType[] = Object.keys(showData).map((i: string) => ({ title: `${i}图标`, isTemp: true, children: [] }));
-      keys.length > 0 && setCurrentMenu(keys[0]);
-      setMenus(keys);
-    } else {
-      setMenus(MenuData)
-    }
-  }, [isChecked, isLine]);
-
+  const test =  Object.values(resultData).sort((a: any, b: any) => a.level - b.level).map((i) => i.data);
   return (
     <div className='right'>
-      {Object.values(showData).map((item: DataType[], index: number) => (
+      {test.map((item: DataType[], index: number) => (
         <CurrentIcon
           size={size}
           color={color}
@@ -148,7 +111,7 @@ const IconFlex = (props: IconFlexProps) => {
           idx={index}
           key={index}
           isBatch={isBatch}
-          title={item.length > 0 &&  item[0].category ? item[0].category.split('/')[1] : ''}
+          title={item.length > 0 &&  item[0].category ? SpecialMap[item[0].category.split('/')[1]] ||  item[0].category.split('/')[1]: ''}
         />
       ))}
     </div>

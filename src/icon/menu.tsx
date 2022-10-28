@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Icon } from '@uni/design';
-// import MenuData from './menu.config';
 import { MenuType } from './index';
 
 
@@ -10,20 +9,20 @@ interface MenuProps {
   setCurrentMenu: (current: MenuType) => void;
   setLine: (siLine: boolean) => void;
   isChecked: boolean;
-  menus: MenuType[];
   specialIcon: string[];
+  menus: MenuType[];
 }
 
 const MenuCom = (props: MenuProps) => {
-  const { currentMenu, setCurrentMenu, setLine, menus = [], isChecked, specialIcon } = props;
+  const { currentMenu, setCurrentMenu, setLine, isChecked, specialIcon,  menus } = props;
   const [openTitle, $OpenTitle] = useState(['基础图标', 'M域特殊图标']);
   const handleClick = (i: MenuType) => (evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     evt.preventDefault();
     setCurrentMenu(i);
     const parent = document.getElementById('checkedContent');
     const scrollChild = document.getElementById(i.title) as HTMLElement
-    if (isChecked && scrollChild && parent) {
-      parent.scrollTop = scrollChild.offsetTop - 136;
+    if ( scrollChild && parent) {
+      parent.scrollTop = scrollChild.offsetTop;
     }
     
     if (specialIcon.includes(i.title)) {
@@ -41,6 +40,7 @@ const MenuCom = (props: MenuProps) => {
     }
   };
 
+
   return (
     <div className='menu'>
       {isChecked ? <>
@@ -50,9 +50,7 @@ const MenuCom = (props: MenuProps) => {
             onClick={handleClick(item)}
             key={item.title}
           >
-            <a href={`#${currentMenu.title}`}>
-              {item.title}
-            </a>
+            {item.title}
           </div>
         ))}
       </>

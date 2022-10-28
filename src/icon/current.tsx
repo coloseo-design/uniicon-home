@@ -1,11 +1,12 @@
 import React from 'react';
 import { Icon, Popover } from '@uni/design';
-import ReactIcon from 'uni-icons-react';
 import { DataType } from './index';
 
 const CurrentIcon = (props: any) => {
   const {
-    data , setSimple, simple, batchData, active, setActive,
+    data ,
+    setSimple,
+    simple, batchData, active, setActive,
     lineWidth,
     size,
     popNode,
@@ -15,12 +16,12 @@ const CurrentIcon = (props: any) => {
     title,
     isBatch = false,
   } = props;
-
+ 
   return (
-    <>
+    <div>
       <div className='right-header' id={`${title}图标`}>
         {data.length && <div className='info'>{`${title}图标（${data.length}）`}</div>}
-        {idx === 0 && <div className='btns' style={{ marginRight: simple ? 53 : 16 }}>
+        {idx === 0 && <div className='btns' style={{ marginRight: simple ? 69 : 16 }}>
           <div
             className='btns-left'
             style={{ border: simple ? '1px solid #326EFF' : 'undefined', background: simple ? undefined : '#326EFF' }}
@@ -48,7 +49,6 @@ const CurrentIcon = (props: any) => {
               content={popNode(item)}
               placement="rightTop"
               className='popIcon'
-              trigger='click'
               visible={isBatch ? false : undefined}
               overlayStyle={{ height: 184 }}
             >
@@ -67,7 +67,7 @@ const CurrentIcon = (props: any) => {
                 onClick={handleClick.bind(null, item)}
               >
                 <div className='icon-div' style={{ alignItems: simple ? 'center' : 'flex-end', height: simple ? 55 : 47 }}>
-                    <ReactIcon name={item.englishName} lineWidth={lineWidth} style={{ fontSize: size, color: active === item.englishName ? 'rgb(74, 127, 255)' : color }} />
+                    <Icon type={item.englishName} lineWidth={lineWidth} style={{ fontSize: size, color: active === item.englishName ? 'rgb(74, 127, 255)' : color }} />
                   </div>
                   {!simple && <div className='text'>{item.chineseName}</div>}
               </div>
@@ -75,7 +75,7 @@ const CurrentIcon = (props: any) => {
           </div>
         ))}
       </div>
-    </>
+    </div>
   )
 };
 

@@ -1491,17 +1491,17 @@
     "@typescript-eslint/types" "4.33.0"
     eslint-visitor-keys "^2.0.0"
 
-"@uni/design@^0.0.12":
-  version "0.0.12"
-  resolved "https://nexus.coloseo.cn/repository/npm-all/@uni/design/-/design-0.0.12.tgz#6469b3899a9c272030182cd60b41c71da068ebeb"
-  integrity sha512-uDTrn3qO34DD55c5S97oDrzRJfQSqXNsT2D/l2kuslGrmowxksoOiMJ5YE9EMGfnitqIEejOqvusE0OcY4LnNQ==
+"@uni/design@^0.0.13":
+  version "0.0.13"
+  resolved "https://nexus.coloseo.cn/repository/npm-all/@uni/design/-/design-0.0.13.tgz#dc896f5bc438e35e2531ad7a8c725363d427a7c7"
+  integrity sha512-xg1fdQBVC2fQ8VBEHGRP4PkJtR6tUK4iylyCLC9YzH+I0wrGaiYGm6dXoLHxSRh2iYV/S49wOIha0czXjS/25A==
   dependencies:
     async-validator "^3.5.1"
     classnames "^2.2.6"
     dayjs "^1.10.4"
     enquire.js "^2.1.6"
     omit.js "^1.0.2"
-    uni-icons-react "^1.0.0"
+    uni-icons-react "^1.0.2"
 
 "@webassemblyjs/ast@1.9.0":
   version "1.9.0"
@@ -3649,9 +3649,9 @@ dateformat@^3.0.0:
   integrity sha512-jyCETtSl3VMZMWeRo7iY1FL19ges1t55hMo5yaam4Jrsm5EPL89UQkoQRyiI+Yf4k8r2ZpdngkV8hr1lIdjb3Q==
 
 dayjs@^1.10.4:
-  version "1.11.5"
-  resolved "https://nexus.coloseo.cn/repository/npm-all/dayjs/-/dayjs-1.11.5.tgz#00e8cc627f231f9499c19b38af49f56dc0ac5e93"
-  integrity sha512-CAdX5Q3YW3Gclyo5Vpqkgpj8fSdLQcRuzfX6mC6Phy0nfJ0eGYOeS7m4mt2plDWLAtA4TqTakvbboHvUxfe4iA==
+  version "1.11.6"
+  resolved "https://nexus.coloseo.cn/repository/npm-all/dayjs/-/dayjs-1.11.6.tgz#2e79a226314ec3ec904e3ee1dd5a4f5e5b1c7afb"
+  integrity sha512-zZbY5giJAinCG+7AGaw0wIhNZ6J8AhWuSXKvuc1KAyMiRsvGQWqh4L+MomvhdAYjN+lqvVCMq1I41e3YHvXkyQ==
 
 debug@2.6.9, debug@^2.2.0, debug@^2.3.3, debug@^2.6.8, debug@^2.6.9:
   version "2.6.9"
@@ -10006,21 +10006,21 @@ undertaker@^1.2.1:
     object.reduce "^1.0.0"
     undertaker-registry "^1.0.0"
 
-uni-icons-react@^1.0.0, uni-icons-react@^1.0.1:
-  version "1.0.1"
-  resolved "https://nexus.coloseo.cn/repository/npm-all/uni-icons-react/-/uni-icons-react-1.0.1.tgz#458ee63448a2854a5389f4b234c32cb53a065132"
-  integrity sha512-5pNDQrDN5cLABvLOClRpHYuHJ7brhTQYwsvj6wAff2AcQVXzzVGrSlEbwKiXzcNAJ9BwpxLxh1/0pDdyd1/hVw==
+uni-icons-react@^1.0.2:
+  version "1.0.2"
+  resolved "https://nexus.coloseo.cn/repository/npm-all/uni-icons-react/-/uni-icons-react-1.0.2.tgz#ab40d49d5eaf5c6d7b5b946bac325d83fb252ccd"
+  integrity sha512-2I7jahPYub7e3WGKMKZ1q60MI1uEYo8oJiCzBEkmPxRQXt8RUHl733rxRLagWKY0y/Hi9uHu+4U2wO7UHxtXBw==
   dependencies:
     classnames "^2.2.6"
     react "16.8.0"
     react-dom "17.0.0"
-    uni-icons "^1.0.1"
+    uni-icons "^1.0.2"
     union-tool "^0.1.1"
 
-uni-icons@^1.0.1:
-  version "1.0.1"
-  resolved "https://nexus.coloseo.cn/repository/npm-all/uni-icons/-/uni-icons-1.0.1.tgz#ddcb4589aadabad4a940d6c2ef8bc5d20dc0b4fc"
-  integrity sha512-kpivmxUxqLan6/4wuWoM9Plyq75YVzRvA6JAVlu3KdqcoR4IKLBpBuWW0S9tSDANHw4TdJXhP+c0Ps/8xVTBgw==
+uni-icons@^1.0.2:
+  version "1.0.2"
+  resolved "https://nexus.coloseo.cn/repository/npm-all/uni-icons/-/uni-icons-1.0.2.tgz#4305dc0532448b78200d364641e1e39edbbcd22c"
+  integrity sha512-iNCdm0cxNhmMcQV6PmsK9AXswvq78dgnNIyrDUIIjC31PwVtJlwPG2oqS7y0nm44r9KGlZ1HeWB1+YCHLJy9dQ==
 
 uni-tool@^1.0.1:
   version "1.0.1"

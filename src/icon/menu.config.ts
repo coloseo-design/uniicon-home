@@ -1,6 +1,7 @@
 export default [
   {
     title: '基础图标',
+    level: 0,
     children: [
       { title: '通用名词图标', level: 1 },
       { title: '提示状态图标', level: 2 },
@@ -16,10 +17,11 @@ export default [
   },
   {
     title: 'M域特殊图标',
+    level: 0,
     children: [
-      { title: '管理中台图标', level: 11 },
-      { title: '供应链图标', level: 12 },
-      { title: '办公组图标', level: 13 },
+      { title: '管理中台图标', level: 11, alias: 'M域管理中台图标' },
+      { title: '供应链图标', level: 12, alias: 'M域供应链组图标' },
+      { title: '办公组图标', level: 13, alias: 'M域办公组图标' },
     ],
   }
 ]
