@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { SketchPicker } from 'react-color';
-import { Button, Dropdown } from '@uni/design';
+import { Dropdown } from '@uni/design';
 
 interface ColorPickerProps {
   defaultColor?: string;
@@ -19,30 +19,22 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
     onChange && onChange(hex);
   }, [onChange]);
 
-  const clickHandler = useCallback((evt: Event) => {
-    const paths = evt.composedPath();
-    const inside = paths.find((item: HTMLElement) => item.className === 'float-picker');
-    if (inside) return;
-    setVisible(false);
-  }, []);
 
   useEffect(() => {
     setColor(defaultColor);
   }, [defaultColor]);
 
-  useEffect(() => {
-    document.addEventListener('click', clickHandler);
-    return () => {
-      document.removeEventListener('click', clickHandler);
-    };
-  }, [clickHandler]);
+
 
   return (
-    <div className="component-color-picker">
+    <div className="component-color-picker" id="component-color-picker">
       <Dropdown
         visible={visible}
         trigger={['click']}
-        onVisibleChange={(v) => setVisible(v)}
+        onVisibleChange={(v) => {
+          setVisible(v)
+        }}
+        getPopupContainer={() => document.querySelector('#component-color-picker')}
         overlay={
           <div className="float-picker">
             <SketchPicker

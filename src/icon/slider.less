@@ -1,0 +1,95 @@
+
+
+@slider-prefix: 'slider';
+// 滑道
+@slider-rail-cls: ~'@{slider-prefix}-rail';
+// 轨迹
+@slider-bar-cls: ~'@{slider-prefix}-bar';
+// 拖拽点
+@slider-dot-cls: ~'@{slider-prefix}-dot';
+
+.slider-rail(@background) {
+  position: absolute;
+  height: 4px;
+  background: @background;
+  border-radius: 6px;
+}
+
+
+
+.slider {
+  height: 12px;
+  position: relative;
+  padding: 4px 0;
+  &:hover {
+    cursor: pointer;
+    // .slider-rail {
+    //   .slider-rail(darken(#F7F8FA, 5%));
+    // }
+    .slider-bar {
+      .slider-rail(darken(#326EFF, 5%));
+    }
+    // .slider-dot {
+    //   background: darken(#fff, 10%);
+    // }
+  }
+  &-rail {
+    .slider-rail(#E5E6EB);
+    width: 100%;
+  }
+  &-bar {
+    .slider-rail(#326EFF);
+  }
+  &-dot {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #326EFF;
+    top: 0px;
+    transform: translate(-6px, 0);
+    // transition: all .3s ease-in-out;
+    // &:hover {
+    //   border: 2px solid darken(#C0C0C0, 5%);
+    // }
+    &-disabled {
+      border: 2px solid #E5E6EB
+    }
+  }
+}
+
+.@{slider-prefix}-disabled {
+  cursor: not-allowed;
+  &:hover {
+    cursor: not-allowed;;
+  }
+}
+
+
+.slider-tooltip {
+  position: absolute;
+  visibility: hidden;
+  &-content {
+    &-inner{
+      background-color: #707070;
+      color: #fff;
+      border-radius: 2px;
+      padding: 6px;
+      min-width: 30px;
+      min-height: 32px;
+      text-align: center;
+    }
+    &-arrow {
+      width: 5px;
+      height: 5px;
+      background: #707070;
+      position: absolute;
+      transform: translate(-50%, -2.5px) rotate(45deg);
+    }
+    &-arrow-top {
+      bottom: -5px;
+      left: 50%;
+    }
+  }
+}

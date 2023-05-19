@@ -22,7 +22,10 @@ const MenuCom = (props: MenuProps) => {
     const parent = document.getElementById('checkedContent');
     const scrollChild = document.getElementById(i.title) as HTMLElement
     if ( scrollChild && parent) {
-      parent.scrollTop = scrollChild.offsetTop;
+      parent.scrollTo({
+        top: scrollChild.offsetTop - 55,
+        // behavior: 'smooth',
+      })
     }
     
     if (specialIcon.includes(i.title)) {

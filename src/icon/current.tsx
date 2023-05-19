@@ -1,6 +1,7 @@
 import React from 'react';
 import { Icon, Popover } from '@uni/design';
 import { DataType } from './index';
+import ReactIcon from '@uni/icons-react';
 
 const CurrentIcon = (props: any) => {
   const {
@@ -21,7 +22,7 @@ const CurrentIcon = (props: any) => {
     <div>
       <div className='right-header' id={`${title}图标`}>
         {data.length && <div className='info'>{`${title}图标（${data.length}）`}</div>}
-        {idx === 0 && <div className='btns' style={{ marginRight: simple ? 69 : 16 }}>
+        {idx === 0 && <div className='btns' style={{ marginRight: 16 }}>
           <div
             className='btns-left'
             style={{ border: simple ? '1px solid #326EFF' : 'undefined', background: simple ? undefined : '#326EFF' }}
@@ -57,6 +58,7 @@ const CurrentIcon = (props: any) => {
                 style={{
                   width: simple ? 55 : 93,
                   height: simple ? 55 : 93,
+                  margin: simple ? '0px 8px 8px 0px' : '0px 16px 16px 0px',
                   border: batchData.some((i: DataType) => i.englishName === item.englishName) ? '1px solid #326EFF' : undefined,
                 }}
                 onMouseOut={() => {
@@ -67,8 +69,8 @@ const CurrentIcon = (props: any) => {
                 onClick={handleClick.bind(null, item)}
               >
                 <div className='icon-div' style={{ alignItems: simple ? 'center' : 'flex-end', height: simple ? 55 : 47 }}>
-                    <Icon type={item.englishName} lineWidth={lineWidth} style={{ fontSize: size, color: active === item.englishName ? 'rgb(74, 127, 255)' : color }} />
-                  </div>
+                  <ReactIcon spin={false} name={item.englishName || ''} lineWidth={lineWidth} style={{ fontSize: size, color: active === item.englishName ? 'rgb(74, 127, 255)' : color }} />
+                </div>
                   {!simple && <div className='text'>{item.chineseName}</div>}
               </div>
             </Popover>

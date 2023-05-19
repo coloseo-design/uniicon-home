@@ -63,10 +63,11 @@ const Home = () => {
         <div className='design-line' />
         <div>
           <div className='design-subtile' id="分类与组合">分类与组合</div>
-          <div className='description'>Uni Design设计体系中对图标根据其属性分成通用图标和特殊图标两大类：</div>
-          <div className='description' style={{ marginTop: 0 }}>通用图标分为十个小类：通用名词、提示状态、交互操作、方向指示、文本文档、党群人力、财务法务、品牌、数展示、中后台；</div>
+          <div className='description'>Uni Design设计体系中对图标根据其属性分成面性图标和线性图标两大类：</div>
+          <div className='description' style={{ marginTop: 0 }}>通用图标分为十一个小类：通用名词、提示状态、交互操作、方向指示、文本文档、党群人力、财务法务、品牌、数展示、中后台、特殊图标；</div>
           <img src={require('./assets/image2.svg')} alt="" style={{ width: '100%', marginTop: 37 }} />
-          <div className='description' style={{ marginTop: 36 }}>在使用与设计过程中，可以根据应用需求的不同类型的图标进行组合从而生成新的图标；如名词类的图标“文档”与通用类图标“搜索”组合成为功能-动词类图标“查看日志”，这样的设计与分类极大提高了图标体系的延展性，可以快速满足不同种类的功能需求。</div>
+          <div className='description' style={{ marginTop: 36 }}>在使用与设计过程中，可以根据应用需求的不同类型的图标进行组合从而生成新的图标</div>
+          <div className='description' style={{ marginTop: 0 }}>如名词类的图标“文档”与通用类图标“搜索”组合成为功能-动词类图标“查看日志”，这样的设计与分类极大提高了图标体系的延展性，可以快速满足不同种类的功能需求。</div>
           <img src={require('./assets/image3.svg')} alt="" style={{ width: '100%', marginTop: 36 }} />
         </div>
         <div className='design-line' />

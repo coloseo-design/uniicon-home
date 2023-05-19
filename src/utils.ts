@@ -58,7 +58,7 @@ export function DownloadCopyPNG(icon: DataType, size: number, color: string, lin
     if (isDownload) { // 下载png
       Download(canvas.toDataURL('image/png'), `${icon.englishName}-${icon.chineseName}` || '');
     } else { // 复制图片
-      if (navigator.clipboard.write) {
+      if (navigator.clipboard && navigator.clipboard.write) {
         canvas.toBlob(async (blob) => {
           if (blob) {
             const item = new ClipboardItem({ [blob.type]: blob });

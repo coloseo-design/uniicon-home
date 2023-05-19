@@ -1,7 +1,8 @@
 import React, { useCallback } from 'react';
-import { Button, Divider, InputNumber, Slider } from '@uni/design';
+import { Button, Divider, InputNumber } from '@uni/design';
 import ColorPicker from './color-picker';
 import { MenuType } from './index';
+import Slider from './slider';
 
 interface OperationProps {
   size: number,
@@ -57,20 +58,20 @@ const Operation = (props: OperationProps) => {
 
   return (
     <div className='left-fixed'>
-      <div className='title'>样式</div>
+      <div className='title' style={{ marginBottom: 8 }}>样式</div>
       <div className='btn'>
         <Button
           onClick={handleLine(true)}
           disabled={specialIcon.includes(currentMenu.title)}
           type={isLine ? "primary" : 'default'}
-          style={{ width: 103, height: 24, marginRight: 8 }}
+          style={{ width: 103, height: 24, marginRight: 8, color: !isLine ? '#5c6785' : '#fff' }}
         >
           线性
         </Button>
         <Button
           onClick={handleLine(false)}
           type={!isLine ? "primary" : 'default'}
-          style={{ width: 103, height: 24 }}
+          style={{ width: 103, height: 24, color: !isLine ? '#fff' : '#5c6785' }}
         >
           面性
         </Button>
@@ -91,7 +92,7 @@ const Operation = (props: OperationProps) => {
           min={16}
           max={32}
           onChange={handleSizeChange}
-          style={{ width: 49, height: 24, marginLeft: 8 }}
+          style={{ width: 49, height: 24, marginLeft: 8, color: '#5c6785' }}
           value={size}
         />
       </div>
@@ -112,9 +113,9 @@ const Operation = (props: OperationProps) => {
           min={1}
           max={4}
           onChange={handleLineChange}
-          style={{ width: 49, height: 24, marginLeft: 8 }}
+          style={{ width: 49, height: 24, marginLeft: 8, color: '#5c6785' }}
           value={!isLine ? 0 : lineWidth}
-          disabled={specialIcon.includes(currentMenu.title)}
+          disabled={specialIcon.includes(currentMenu.title) || !isLine}
         />
       </div>
       <Divider style={{ borderTop: '1px solid #E8E9ED', margin: '16px 0px 6px 0px' }} />
